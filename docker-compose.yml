@@ -1,0 +1,14 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  url-shortener:
+    build: .
+    ports:
+      - "9808:9808"
+    depends_on:
+        - redis
+    environment:
+        REDIS_ADDR: "redis:6379"
